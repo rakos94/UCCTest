@@ -1,0 +1,1 @@
+php migration.php up
