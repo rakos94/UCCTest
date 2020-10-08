@@ -4,5 +4,19 @@
     "type": "project",
     "license": "MIT",
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require": {
+        "illuminate/database": "^8.9",
+        "php-di/php-di": "^6.2"
+    },
+    "autoload": {
+        "classmap": [
+        ],
+        "psr-4": {
+            "Core\\": "core/"
+        },
+        "files": [
+
+        ]
+    }
 }
