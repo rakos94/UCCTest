@@ -1,8 +1,9 @@
 <?php
-namespace Core;
+namespace App\Core;
 
 use DI\Container;
 use Exception;
+use Jenssegers\Blade\Blade;
 
 class App {
     
@@ -16,20 +17,23 @@ class App {
      */
     public $migration;
 
+    /**
+     * @var Route
+     */
+    public $route;
+
+    /**
+     * @var Blade
+     */
+    public $blade;
+
     public function __construct()
     {
         $container = new Container();
-        // $database = $container->get('Database');
 
-        $this->database = $container->make(Database::class);
-        $this->migration = $container->make(Migration::class);
-
-
-        
-        // print_r($database->capsule);
-         
-        // Set the event dispatcher used by Eloquent models... (optional)
-        // $this->capsule->setEventDispatcher(new Dispatcher(new Container));
+        $this->database = $container->get(Database::class);
+        $this->migration = $container->get(Migration::class);
+        $this->InitBlade();
     }
 
     public function MigrationUp()
@@ -50,5 +54,12 @@ class App {
         } catch (Exception $e){
             echo 'Fail';
         }
+    }
+
+    public function InitBlade()
+    {
+        $views = __DIR__ . '/../../resources/views';
+        $cache = __DIR__ . '/../../resources//cache';
+        $this->blade = new Blade($views, $cache);
     }
 }
