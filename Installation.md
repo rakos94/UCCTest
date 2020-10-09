@@ -1,4 +1,4 @@
-## Installation
+# Installation
 1. composer install
 2. set .env
 3. php migration.php up
