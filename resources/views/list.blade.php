@@ -18,8 +18,8 @@
                 <div class="mt-2" style="
                     font-size: 18px;
                     font-weight: 700;">
-                    {{ $item->engine_displacement }} /
-                    {{ $item->engine_power }}
+                    {{ $item->engine_displacement }}{{ $item->engine_displacement_code }} /
+                    {{ $item->engine_power }} HP
                 </div>
             </div>
             <div class="col col-3 text-center">
