@@ -9,12 +9,11 @@ class Database {
     /**
      * var Capsule
      */
-    public $capsule;
+    private $capsule;
 
     public function __construct(Capsule $capsule)
     {
         $this->capsule = $capsule;
-        $this->setConnection();
 
         // Make this Capsule instance available globally via static methods... (optional)
         $this->capsule->setAsGlobal();
@@ -23,9 +22,13 @@ class Database {
         $this->capsule->bootEloquent();
     }
     
-    public function setConnection()
+    public function getCapsule() : Capsule
     {
-        $config_db = require_once( __DIR__ . '/../../config/database.php');
-        $this->capsule->addConnection($config_db);
+        return $this->capsule;
+    }
+
+    public function setConnection($conn)
+    {
+        $this->capsule->addConnection($conn);
     }
 }

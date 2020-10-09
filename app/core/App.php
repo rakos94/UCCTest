@@ -36,11 +36,17 @@ class App {
     public function __construct()
     {
         $container = new Container();
-
         $this->database = $container->get(Database::class);
         $this->migration = $container->get(Migration::class);
         $this->seeder = $container->get(BaseSeeder::class);
+        $this->setupDB();
         $this->InitBlade();
+    }
+
+    private function setupDB()
+    {
+        $config_db = include('../config/database.php');
+        $this->database->setConnection($config_db);
     }
 
     public function MigrationUp()
