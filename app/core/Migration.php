@@ -2,26 +2,32 @@
 
 namespace App\Core;
 
-use Illuminate\Database\Capsule\Manager as Capsule;
-use Illuminate\Database\Schema\Blueprint;
+use App\Migrations\BaseMigration;
 
 class Migration {
 
-    private $tableName = 'vehicle';
+    private $tableClass = [
+        'EngineDisplacementTypeTable',
+        'VehicleTable'
+    ];
 
     public function up(){
-        Capsule::schema()->create($this->tableName, function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('engine_displacement');
-            $table->string('engine_power');
-            $table->integer('price');
-            $table->string('location');
-            $table->timestamps();
-        });
+        foreach ($this->tableClass as $key => $value) {
+            $migration = $this->createClassName($value);
+            $migration->run();
+        }
     }
 
     public function down(){
-        Capsule::schema()->dropIfExists($this->tableName);
+        foreach ($this->tableClass as $key => $value) {
+            $migration = $this->createClassName($value);
+            $migration->down();
+        }
+    }
+
+    private function createClassName($value) : BaseMigration
+    {
+        $className = "\\App\\Migrations\\" . $value;
+        return new $className;
     }
 }
