@@ -35,12 +35,19 @@ class App {
 
     public function __construct()
     {
+        $this->setupEnv();
         $container = new Container();
         $this->database = $container->get(Database::class);
         $this->migration = $container->get(Migration::class);
         $this->seeder = $container->get(BaseSeeder::class);
         $this->setupDB();
         $this->InitBlade();
+    }
+
+    private function setupEnv()
+    {
+        $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
+        $dotenv->load();
     }
 
     private function setupDB()
