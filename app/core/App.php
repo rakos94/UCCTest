@@ -1,6 +1,7 @@
 <?php
 namespace App\Core;
 
+use App\Seeder\BaseSeeder;
 use DI\Container;
 use Exception;
 use Jenssegers\Blade\Blade;
@@ -18,6 +19,11 @@ class App {
     public $migration;
 
     /**
+     * @var BaseSeeder
+     */
+    public $seeder;
+
+    /**
      * @var Route
      */
     public $route;
@@ -33,6 +39,7 @@ class App {
 
         $this->database = $container->get(Database::class);
         $this->migration = $container->get(Migration::class);
+        $this->seeder = $container->get(BaseSeeder::class);
         $this->InitBlade();
     }
 
@@ -40,6 +47,7 @@ class App {
     {
         try {
             $this->migration->up();
+            $this->seeder->run();
             echo 'Success';
         } catch (Exception $e){
             echo 'Fail';
