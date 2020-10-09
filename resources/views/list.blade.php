@@ -1,6 +1,6 @@
 <h4>List of vehicle</h4>
 @foreach ($vehicles as $item)
-    <div class="py-2" style="background: #fff1f1;border-radius: 5px;">
+    <div class="py-2 mb-3" style="background: #fff1f1;border-radius: 5px;">
         <div class="d-flex">
             <div class="col col-5">
                 <div>
