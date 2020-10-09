@@ -2,7 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-$app = new Core\App;
+$app = new App\Core\App;
 
 switch ($argv[1]) {
     case 'up':
