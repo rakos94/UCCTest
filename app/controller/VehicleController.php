@@ -11,7 +11,7 @@ class VehicleController extends BaseController{
         $vehicles = Vehicle::get();
         $type = EngineDisplacementType::get();
         $res = print $this->blade->make('index',['vehicles' => $vehicles, 'type' => $type])->render();
-        return $res;
+        return function(){};
     }
     
     public function post()
